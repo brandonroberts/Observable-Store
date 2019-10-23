@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CustomersService } from './core/store/customers.service';
 import { Customer } from './core/store/customer';
 import { Observable, Subscription } from 'rxjs';
+import { ExtensionService } from './extension/extension.service';
 
 @Component({
   selector: 'app-root',
@@ -14,9 +15,14 @@ export class AppComponent implements OnInit, OnDestroy {
   isHistoryVisible = false;
   sub: Subscription;
 
-  constructor(private customersService: CustomersService) { }
+  constructor(
+    private customersService: CustomersService,
+    private extensionService: ExtensionService
+  ) { }
 
   ngOnInit() {
+    this.extensionService.init({ name: 'Observable Store' });
+
     // Use Observable<Customer> if desired
     // this.customers$ = this.customersStore.stateChanged;
 
